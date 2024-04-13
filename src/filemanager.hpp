@@ -6,7 +6,12 @@
 #include <iterator>
 #include <algorithm>
 
-namespace fs = std::filesystem;
+inline void
+create(const std::string fileName)
+{
+    std::fstream file(fileName, std::ios::app | std::ios::binary);
+    file.close();
+}
 
 inline void 
 clearFile(const std::string& fileName)
@@ -19,7 +24,7 @@ clearFile(const std::string& fileName)
 inline void 
 checkFile(const std::string& fileName)
 {
-    if(!fs::exists(fileName.c_str()))
+    if(!std::filesystem::exists(fileName.c_str()))
     {
         perror("ERROR: FILE DOES NOT EXIST");
         EXIT_FAILURE;
